@@ -31,3 +31,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### los binarios :) ###
+
+src/main/webapp/WEB-INF/classes
