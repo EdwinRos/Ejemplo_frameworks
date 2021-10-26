@@ -6,62 +6,88 @@
 <h:head>
     <title>Estudiante</title>
 </h:head>
-
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"/>
 <h:body>
-    <h:form>
-        <div class="ui-fluid p-formgrid p-grid">
-            <div class="p-field p-col">
-                <label for="firstname">Nombres</label>
-                <p:inputText id="firstname" type="text" value="#{alumnoController.alumno.nombre}" required="true"
-                             requiredMessage="Ingrese un nombre"/>
-                <label for="Apellido">Apellidos</label>
-                <p:inputText id="Apellido" type="text" value="#{alumnoController.alumno.apellido}" required="true"
-                             requiredMessage="Ingrese un nombre"/>
-                <label for="Correo">Correo electronico</label>
-                <p:inputText id="Correo" required="true" requiredMessage="Ingrese una direccion de correo" value="#{alumnoController.alumno.correo}"/>
-            </div>
-            <div class="p-field p-col">
-                <label for="edad">Edad</label>
-                <p:inputText id="edad" type="number" value="#{alumnoController.alumno.edad}"/>
-            </div>
-            <p:commandButton ajax="false" value="Guardar" action="#{alumnoController.saveAlumno}"/>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <span class="navbar-brand">Estudiantes</span>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="/materia/inicio">Materias</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/alumno/inicio">Alumnos</a>
+              </li>
+            </ul>
+          </div>
         </div>
-    </h:form>
-
-    <div class="card">
-        <h:form>
-            <p:dataTable var="alum" value="#{alumnoController.alumnoList}" rows="10"
-                         paginator="true"
-                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                         currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
-                         rowsPerPageTemplate="5,10,{ShowAll|'All'}">
-
-                <p:column headerText="Name">
-                    <h:outputText value="#{alum.nombre}" />
-                </p:column>
-
-                <p:column headerText="Country">
-                    <h:outputText value="#{alum.apellido}" />
-                </p:column>
-
-                <p:column headerText="Company">
-                    <h:outputText value="#{alum.correo}" />
-                </p:column>
-
-                <p:column headerText="Representative">
-                    <h:outputText value="#{alum.edad}" />
-                </p:column>
-
-                <p:column headerText="Acciones" >
-                    <p:commandButton icon="pi pi-user-edit" action="#{alumnoController.editar}" >
-                        <f:param value="#{alum.id}" name="idAlumno"/>
-                    </p:commandButton>
-                    <p:button icon="pi pi-book" href="/alumnoMateria/inicio" value="Materias" styleClass="ui-button-help">
-                        <f:param value="#{alum.id}" name="idalumnoMateria" />
-                    </p:button>
-                </p:column>
-            </p:dataTable>
-        </h:form>
+      </nav>
+    <div class="container shadow-lg p-3 mt-5 mb-5 bg-white rounded">
+        <div class="row">
+            <div class="col-md-12 d-flex justify-content-center align-items-center">
+                <div class="w-25 mt-5 mb-5">
+                    <h:form>
+                        <div class="ui-fluid p-formgrid p-grid">
+                            <div class="p-field p-col">
+                                <label for="firstname">Nombres</label>
+                                <p:inputText id="firstname" type="text" value="#{alumnoController.alumno.nombre}" required="true"
+                                            requiredMessage="Ingrese un nombre"/>
+                                <label for="Apellido">Apellidos</label>
+                                <p:inputText id="Apellido" type="text" value="#{alumnoController.alumno.apellido}" required="true"
+                                            requiredMessage="Ingrese un nombre"/>
+                                <label for="Correo">Correo electronico</label>
+                                <p:inputText id="Correo" required="true" requiredMessage="Ingrese una direccion de correo" value="#{alumnoController.alumno.correo}"/>
+                            </div>
+                            <div class="p-field p-col">
+                                <label for="edad">Edad</label>
+                                <p:inputText id="edad" type="number" value="#{alumnoController.alumno.edad}"/>
+                            </div>
+                            <center><p:commandButton class="w-50 mt-3 mb-3" ajax="false" value="Guardar" action="#{alumnoController.saveAlumno}"/></center>
+                        </div>
+                    </h:form>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 mb-5">
+                <div class="card">
+                    <h:form>
+                        <p:dataTable var="alum" value="#{alumnoController.alumnoList}" rows="10"
+                                     paginator="true"
+                                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+                                     rowsPerPageTemplate="5,10,{ShowAll|'All'}">
+            
+                            <p:column headerText="Name">
+                                <h:outputText value="#{alum.nombre}" />
+                            </p:column>
+            
+                            <p:column headerText="Country">
+                                <h:outputText value="#{alum.apellido}" />
+                            </p:column>
+            
+                            <p:column headerText="Company">
+                                <h:outputText value="#{alum.correo}" />
+                            </p:column>
+            
+                            <p:column headerText="Representative">
+                                <h:outputText value="#{alum.edad}" />
+                            </p:column>
+            
+                            <p:column headerText="Acciones" >
+                                <p:commandButton icon="pi pi-user-edit" action="#{alumnoController.editar}" >
+                                    <f:param value="#{alum.id}" name="idAlumno"/>
+                                </p:commandButton>
+                            </p:column>
+                        </p:dataTable>
+                    </h:form>
+                </div>
+            </div>
+        </div>
     </div>
 
 </h:body>
