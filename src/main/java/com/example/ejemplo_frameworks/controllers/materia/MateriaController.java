@@ -24,17 +24,19 @@ public class MateriaController {
     MateriaRepository materiaRepository;
     Materia materia = new Materia();
     List<Materia> materiaList;
-
+    
+    @Deferred
+    @RequestAction
+    @IgnorePostback
+    public void loadMaterias(){
+    	materiaList = materiaRepository.findAll();
+    }
+    
     public String saveMateria(){
         materiaRepository.save(materia);
         materia = new Materia();
         return "/materia/inicio.xhtml?faces-redirect=true";
     }
-
-    @Deferred
-    @RequestAction
-    @IgnorePostback
-    public void loadMaterias(){materiaList = materiaRepository.findAll();}
 
     public List<Materia> getMateriaList() {
         return materiaList;
@@ -42,6 +44,7 @@ public class MateriaController {
 
     public String editar(){
         materia = materiaRepository.findMateriaById(Integer.valueOf(JsfUtils.getRequest().getParameter("materiaID")));
+        
         return "/materia/inicio.xhtml?faces-redirect=true";
     }
 
