@@ -1,0 +1,64 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Materias por alumno</title>
+</h:head>
+<h:body>
+
+    <div>
+        <h:form>
+        <p><b>Nombre:</b>
+            #{alumnoMateriaController.alumno.nombre}
+        </p>
+        <p><b>Apellido:</b>
+            #{alumnoMateriaController.alumno.apellido}
+        </p>
+        <p><b>Correo:</b>
+            #{alumnoMateriaController.alumno.correo}
+        </p>
+        <p><b>Edad:</b>
+            #{alumnoMateriaController.alumno.edad}
+        </p>
+
+        <p:selectOneMenu value="#{alumnoMateriaController.materia.id}">
+            <f:selectItems value="#{alumnoMateriaController.materiasNoCursadas}" var="MnC" itemValue="#{MnC.id}" itemLabel="#{MnC.nombre}"/>
+        </p:selectOneMenu>
+        <p:commandButton ajax="false" value="Asignar" action="#{alumnoMateriaController.saveAlumnoMateria}" />
+        </h:form>
+    </div>
+
+
+    <div class="card">
+        <h:form>
+            <p:dataTable var="mxa" value="#{alumnoMateriaController.alumnoMateriaList}" rows="10"
+                         paginator="true"
+                         emptyMessage="sin registros"
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+                         rowsPerPageTemplate="5,10,{ShowAll|'All'}">
+
+                <f:facet name="header">
+                    Materias inscritas por este estudiante
+                </f:facet>
+
+                <p:column headerText="Name">
+                    <h:outputText value="#{mxa.materiaid.nombre}"/>
+                </p:column>
+
+                <p:column headerText="Fecha de registro">
+                    <h:outputText value="#{mxa.materiaid.fechaRegistro}"/>
+
+                </p:column>
+                <p:column headerText="Acciones">
+                        <p:commandButton id="delete" action="#{alumnoMateriaController.deleteMateria}" value="Retirar" styleClass="ui-button-danger">
+                            <f:param value="#{mxa.id}" name="idMxA"/>
+                        </p:commandButton>
+                </p:column>
+            </p:dataTable>
+
+        </h:form>
+    </div>
+</h:body>
+</html>

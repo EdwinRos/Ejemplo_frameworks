@@ -56,6 +56,9 @@
                     <p:commandButton icon="pi pi-user-edit" action="#{alumnoController.editar}" >
                         <f:param value="#{alum.id}" name="idAlumno"/>
                     </p:commandButton>
+                    <p:button icon="pi pi-book" href="/alumnoMateria/inicio" value="Materias">
+                        <f:param value="#{alum.id}" name="idalumnoMateria" />
+                    </p:button>
                 </p:column>
             </p:dataTable>
         </h:form>

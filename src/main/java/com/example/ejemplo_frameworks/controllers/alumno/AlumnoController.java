@@ -16,7 +16,7 @@ import java.util.List;
 @Scope(value = "session") // Define que solo habra una instancia de esta clase por usuario
 @Component(value = "alumnoController") //Define esta clase como un componente de Spring y lo llama "alumnoController"
 @ELBeanName(value = "alumnoController") //Configura el nombre del Bean en el rewrite Scope
-@Join(path = "/alumno/inicio" , to = "/alumno/inicio.jsf") //Confugura que la URL "/alumno" va a responder con la vista "/index.jsf"
+@Join(path = "/alumno/inicio" , to = "/alumno/inicio.jsf") //Enruta una vista con la URL definida en el campo PATH
 public class AlumnoController {
 
     @Autowired
