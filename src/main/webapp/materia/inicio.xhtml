@@ -6,43 +6,54 @@
 <h:head>
     <title>Materias</title>
 </h:head>
-
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"/>
 <h:body>
-    <h:form>
-        <div class="ui-fluid p-formgrid p-grid">
-            <div class="p-field p-col">
-                <label for="firstname">Nombres</label>
-                <p:inputText id="firstname" type="text" value="#{materiaController.materia.nombre}" required="true"
-                             requiredMessage="Ingrese un nombre"/>
+    <div class="container">
+        <div class="row">
+            <div class="shadow-lg p-3 mb-5 bg-white rounded mt-5">
+                <div class="col-md-12 d-flex justify-content-center align-items-center">
+                    <div class="w-50 mt-5 mb-5">
+                        <h:form>
+                            <div class="ui-fluid p-formgrid p-grid">
+                                <div class="p-field p-col">
+                                    <label for="firstname">Nombres</label>
+                                    <p:inputText id="firstname" type="text" value="#{materiaController.materia.nombre}" required="true"
+                                                requiredMessage="Ingrese un nombre"/>
+                                </div>
+                                <center><p:commandButton class="w-25 mt-3 mb-3" ajax="false" value="Guardar" action="#{materiaController.saveMateria}"/></center>
+                            </div>
+                        </h:form>
+                    </div>
+                </div>
+                <div class="col-md-12 d-flex justify-content-center align-items-center">
+                    <div class="w-50">
+                        <h:form>
+                            <p:dataTable var="materia" value="#{materiaController.materiaList}" rows="10"
+                                        paginator="true"
+                                        paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                        currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+                                        rowsPerPageTemplate="5,10,{ShowAll|'All'}">
+    
+                                <p:column headerText="Name">
+                                    <h:outputText value="#{materia.nombre}" />
+                                </p:column>
+    
+                                <p:column headerText="Fecha de registro">
+                                    <h:outputText value="#{materia.fechaRegistro}" />
+                                </p:column>
+    
+    
+                                <p:column headerText="Acciones" >
+                                    <p:commandButton icon="pi pi-pencil" action="#{materiaController.editar}" >
+                                        <f:param value="#{materia.id}" name="materiaID"/>
+                                    </p:commandButton>
+                                </p:column>
+                            </p:dataTable>
+                        </h:form>
+                    </div>
+                </div>
             </div>
-            <p:commandButton ajax="false" value="Guardar" action="#{materiaController.saveMateria}"/>
         </div>
-    </h:form>
-
-    <div class="card">
-        <h:form>
-            <p:dataTable var="materia" value="#{materiaController.materiaList}" rows="10"
-                         paginator="true"
-                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                         currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
-                         rowsPerPageTemplate="5,10,{ShowAll|'All'}">
-
-                <p:column headerText="Name">
-                    <h:outputText value="#{materia.nombre}" />
-                </p:column>
-
-                <p:column headerText="Fecha de registro">
-                    <h:outputText value="#{materia.fechaRegistro}" />
-                </p:column>
-
-
-                <p:column headerText="Acciones" >
-                    <p:commandButton icon="pi pi-pencil" action="#{materiaController.editar}" >
-                        <f:param value="#{materia.id}" name="materiaID"/>
-                    </p:commandButton>
-                </p:column>
-            </p:dataTable>
-        </h:form>
     </div>
 
 </h:body>

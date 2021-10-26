@@ -24,28 +24,28 @@ public class AlumnoController {
     Alumno alumno = new Alumno();
 
     List<Alumno> alumnoList ;
-
-    public String saveAlumno(){
-        alumnoRepository.save(alumno);
-        alumno = new Alumno();
-        return "/alumno/inicio.xhtml?faces-redirect=true";
-    }
-
+    
     @Deferred
     @RequestAction
     @IgnorePostback
     public void loadAlumnos(){
         alumnoList = alumnoRepository.findAll();
     }
-
+    
+    public String saveAlumno(){
+        alumnoRepository.save(alumno);
+        alumno = new Alumno();
+        
+        return "/alumno/inicio.xhtml?faces-redirect=true";
+    }
 
     public List<Alumno> getAlumnoList() {
-
         return alumnoList;
     }
 
     public String editar(){
         alumno = alumnoRepository.findAlumnoById(Integer.valueOf(JsfUtils.getRequest().getParameter("idAlumno")));
+        
         return "/alumno/inicio.xhtml?faces-redirect=true";
     }
 

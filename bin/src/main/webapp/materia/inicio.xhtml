@@ -1,0 +1,49 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Materias</title>
+</h:head>
+
+<h:body>
+    <h:form>
+        <div class="ui-fluid p-formgrid p-grid">
+            <div class="p-field p-col">
+                <label for="firstname">Nombres</label>
+                <p:inputText id="firstname" type="text" value="#{materiaController.materia.nombre}" required="true"
+                             requiredMessage="Ingrese un nombre"/>
+            </div>
+            <p:commandButton ajax="false" value="Guardar" action="#{materiaController.saveMateria}"/>
+        </div>
+    </h:form>
+
+    <div class="card">
+        <h:form>
+            <p:dataTable var="materia" value="#{materiaController.materiaList}" rows="10"
+                         paginator="true"
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+                         rowsPerPageTemplate="5,10,{ShowAll|'All'}">
+
+                <p:column headerText="Name">
+                    <h:outputText value="#{materia.nombre}" />
+                </p:column>
+
+                <p:column headerText="Fecha de registro">
+                    <h:outputText value="#{materia.fechaRegistro}" />
+                </p:column>
+
+
+                <p:column headerText="Acciones" >
+                    <p:commandButton icon="pi pi-pencil" action="#{materiaController.editar}" >
+                        <f:param value="#{materia.id}" name="materiaID"/>
+                    </p:commandButton>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+    </div>
+
+</h:body>
+</html>
