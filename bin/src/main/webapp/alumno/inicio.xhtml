@@ -1,0 +1,65 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Estudiante</title>
+</h:head>
+
+<h:body>
+    <h:form>
+        <div class="ui-fluid p-formgrid p-grid">
+            <div class="p-field p-col">
+                <label for="firstname">Nombres</label>
+                <p:inputText id="firstname" type="text" value="#{alumnoController.alumno.nombre}" required="true"
+                             requiredMessage="Ingrese un nombre"/>
+                <label for="Apellido">Apellidos</label>
+                <p:inputText id="Apellido" type="text" value="#{alumnoController.alumno.apellido}" required="true"
+                             requiredMessage="Ingrese un nombre"/>
+                <label for="Correo">Correo electronico</label>
+                <p:inputText id="Correo" required="true" requiredMessage="Ingrese una direccion de correo" value="#{alumnoController.alumno.correo}"/>
+            </div>
+            <div class="p-field p-col">
+                <label for="edad">Edad</label>
+                <p:inputText id="edad" type="number" value="#{alumnoController.alumno.edad}"/>
+            </div>
+            <p:commandButton ajax="false" value="Guardar" action="#{alumnoController.saveAlumno}"/>
+        </div>
+    </h:form>
+
+    <div class="card">
+        <h:form>
+            <p:dataTable var="alum" value="#{alumnoController.alumnoList}" rows="10"
+                         paginator="true"
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+                         rowsPerPageTemplate="5,10,{ShowAll|'All'}">
+
+                <p:column headerText="Name">
+                    <h:outputText value="#{alum.nombre}" />
+                </p:column>
+
+                <p:column headerText="Country">
+                    <h:outputText value="#{alum.apellido}" />
+                </p:column>
+
+                <p:column headerText="Company">
+                    <h:outputText value="#{alum.correo}" />
+                </p:column>
+
+                <p:column headerText="Representative">
+                    <h:outputText value="#{alum.edad}" />
+                </p:column>
+
+                <p:column headerText="Acciones" >
+                    <p:commandButton icon="pi pi-user-edit" action="#{alumnoController.editar}" >
+                        <f:param value="#{alum.id}" name="idAlumno"/>
+                    </p:commandButton>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+    </div>
+
+</h:body>
+</html>
